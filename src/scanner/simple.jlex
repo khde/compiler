@@ -138,6 +138,7 @@ return new Symbol(sym.EOF);
     }
 }
 
+// String literals
 \"([^\\\"\n]|\\[nt'\"\\])*\" {
     for (int i = 0; i < yytext().length(); i++) {
         if (yytext().charAt(i) == '\n') {
