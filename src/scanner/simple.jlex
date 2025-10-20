@@ -138,6 +138,16 @@ return new Symbol(sym.EOF);
     }
 }
 
+\"([^\\\"\n]|\\[nt'\"\\])*\" {
+    for (int i = 0; i < yytext().length(); i++) {
+        if (yytext().charAt(i) == '\n') {
+            CharNum.num = 1;
+        } else {
+            CharNum.num++;
+        }
+    }
+    return new Symbol(sym.STRINGLITERAL, new TokenVal(yyline+1, CharNum.num));
+}
 
 // Invalid chars
 .	   {Errors.fatal(yyline+1, CharNum.num,
